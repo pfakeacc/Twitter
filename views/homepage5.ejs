@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+<link rel='stylesheet' href='/stylesheets/bootstrap-theme.css' />
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel='stylesheet' href='/stylesheets/jquery.atwho.css' />
+<script src="/js/jquery-1.12.1.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/angular.js"></script>
+<script src="/js/smoothscroll.js"></script>
+<script src="/angularjs/login.js"></script>
+<script type="text/javascript" src="http://ichord.github.io/Caret.js/src/jquery.caret.js"></script>
+<script type="text/javascript" src="/js/jquery.atwho.js"></script>
+  <script type="text/javascript">
+  $(function(){
+    var jeremy = decodeURI("J%C3%A9r%C3%A9my") // Jérémy
+    var tags = ["Jacob","Isabella","Ethan","Emma","Michael","Olivia","Alexander","Sophia","William","Ava","Joshua","Emily","Daniel","Madison","Jayden","Abigail","Noah","Chloe"];
+    $('#inputPostMessage').atwho({
+      at: "#",
+      data: tags,
+      limit: 200,
+      callbacks: {
+        afterMatchFailed: function(at, el) {
+          // 32 is spacebar
+          if (at == '#') {
+            tags.push(el.text().trim().slice(1));
+            this.model.save(tags);
+            this.insert(el.text().trim());
+            return false;
+          }
+        }
+      }
+    });
+  });
+  </script>
+  <style type="text/css">
+    /*override atwho's style*/
+    .atwho-inserted {
+      color: #4183C4;
+    }
+    .atwho-query {
+      color: #4183C4;
+    }
+  </style>
+<title>Welcome</title>
+</head>
+<body>
+	<!--  <div class="row">
+		<div class="col-md-12">
+			<form action="logout" method="post">
+				<h4>Welcome to the Portal, <%= username %></h4>
+				<input type="submit" value="Logout" class="btn btn-success" />
+			</form>
+		</div>
+	</div>-->
+
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" rel="home" href="homepage">Twitter</a>
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+				<li><a href="#">Link</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Separated link</a></li>
+						<li class="divider"></li>
+						<li><a href="#">One more separated link</a></li>
+					</ul></li>
+			</ul>
+			<div class="col-sm-3 col-md-3 pull-right">
+				<form class="navbar-form" role="search" action="/search" method="post">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search"
+							name="searchparam" id="searchparam">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit" ng-click="submit();">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+
+		<!--left-->
+		<div class="col-sm-3">
+			<h2><%= username %></h2>
+			<div class="panel panel-default">
+				<div class="panel-heading">Title</div>
+				<div class="panel-body">Sed ac orci quis tortor imperdiet
+					venenatis. Duis elementum auctor accumsan. Aliquam in felis sit
+					amet augue.</div>
+			</div>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">Title</div>
+				<div class="panel-body">Content here..</div>
+			</div>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">Title</div>
+				<div class="panel-body">Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Duis pharetra varius quam sit amet
+					vulputate. Quisque mauris augue, molestie tincidunt condimentum
+					vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis
+					nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum
+					auctor accumsan. Aliquam in felis sit amet augue.</div>
+			</div>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">Title</div>
+				<div class="panel-body">Content here..</div>
+			</div>
+			<hr>
+		</div>
+		<!--/left-->
+
+		<!--center-->
+		<div class="col-sm-6">
+			<form role="form">
+				<div ng-app="tweetApp" ng-controller="tweetCtrl" class = "container" id="tweetId">
+					<div class="input-group input-group col-sm-5">
+						<div class="input-group-addon">Status</div>
+						<input id="inputPostMessage" class="form-control input"
+							ng-model="inputMessage" type="text"
+							placeholder="What is your status?">
+						<div class="input-group-btn">
+							<button id="btnPost" type="button" ng-click="submit();" class="btn btn-success"
+								ng-disabled="inputMessage.length < 1 || inputMessage.length >= 141 || inputMessage=='' || inputMessage == null"
+								ng-class="{'btn-warning': inputMessage.length >= 120, 'btn-danger': inputMessage.length >= 141 }">{{
+								140 - inputMessage.length }}</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<% for(var i in data) { %>
+			<div class="row">
+				<div class="col-xs-12">
+					<a href="/profile?username=<%= data[i].username %>"><h4>@<%= data[i].username %></h4></a>
+					<p><%- data[i].tweets %></p>
+					<!-- <p class="lead">
+						<button class="btn btn-default">Read More</button>
+					</p> 
+					<p class="pull-right">
+						<span class="label label-default">keyword</span> <span
+							class="label label-default">tag</span> <span
+							class="label label-default">post</span>
+					</p> -->
+					<ul class="list-inline">
+						<li><a href="#">2 Days Ago</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-share"></i>
+								Retweet</a></li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+
+			<% } %>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Article Heading</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Duis pharetra varius quam sit amet vulputate. Quisque mauris
+						augue, molestie tincidunt condimentum vitae, gravida a libero.
+						Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis
+						tortor imperdiet venenatis. Duis elementum auctor accumsan.
+						Aliquam in felis sit amet augue.</p>
+					<p class="lead">
+						<button class="btn btn-default">Read More</button>
+					</p>
+					<p class="pull-right">
+						<span class="label label-default">keyword</span> <span
+							class="label label-default">tag</span> <span
+							class="label label-default">post</span>
+					</p>
+					<ul class="list-inline">
+						<li><a href="#">4 Days Ago</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-comment"></i>
+								7 Comments</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-share"></i>
+								56 Shares</a></li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Article Heading</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+						Duis pharetra varius quam sit amet vulputate. Quisque mauris
+						augue, molestie tincidunt condimentum vitae, gravida a libero.
+						Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis
+						tortor imperdiet venenatis. Duis elementum auctor accumsan.
+						Aliquam in felis sit amet augue.</p>
+					<p class="lead">
+						<button class="btn btn-default">Read More</button>
+					</p>
+					<p class="pull-right">
+						<span class="label label-default">keyword</span> <span
+							class="label label-default">tag</span> <span
+							class="label label-default">post</span>
+					</p>
+					<ul class="list-inline">
+						<li><a href="#">1 Week Ago</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-comment"></i>
+								4 Comments</a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-share"></i>
+								34 Shares</a></li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<!--/center-->
+
+		<!--right-->
+		<div class="col-sm-3">
+			<h2>Side</h2>
+			<div class="panel panel-default">
+				<div class="panel-heading">Title</div>
+				<div class="panel-body">Sed ac orci quis tortor imperdiet
+					venenatis. Duis elementum auctor accumsan. Aliquam in felis sit
+					amet augue.</div>
+			</div>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">Title</div>
+				<div class="panel-body">Content here..</div>
+			</div>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">Title</div>
+				<div class="panel-body">Lorem ipsum dolor sit amet,
+					consectetur adipiscing elit. Duis pharetra varius quam sit amet
+					vulputate. Quisque mauris augue, molestie tincidunt condimentum
+					vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis
+					nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum
+					auctor accumsan. Aliquam in felis sit amet augue.</div>
+			</div>
+			<hr>
+			<div class="panel panel-default">
+				<div class="panel-heading">Title</div>
+				<div class="panel-body">Content here..</div>
+			</div>
+			<hr>
+		</div>
+		<!--/right-->
+		<hr>
+	</div>
+	<!--/container-fluid-->
+	<!-- /.container -->
+	<script src="/angularjs/login.js"></script>
+	<script src="/angularjs/tweet.js"></script>
+
+</body>
+</html>
