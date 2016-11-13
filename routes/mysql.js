@@ -5,7 +5,7 @@ var mysql = require('mysql');
 
 var pool      =    mysql.createPool({
 	connectionLimit : 500, //important
-	host     : 'localhost',
+	host     : 'twittertest.cf3yndxmarmx.us-west-2.rds.amazonaws.com',
     user     : 'root',
     password : 'qwerty123',
     database : 'test',
