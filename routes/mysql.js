@@ -5,10 +5,10 @@ var mysql = require('mysql');
 
 var pool      =    mysql.createPool({
 	connectionLimit : 500, //important
-	host     : 'twittertest.cf3yndxmarmx.us-west-2.rds.amazonaws.com',
-    user     : 'root',
-    password : 'qwerty123',
-    database : 'test',
+	host     : 'chack.cm4wup6plou1.us-west-2.rds.amazonaws.com',
+    user     : 'chack',
+    password : 'chack1234',
+    database : 'pntwitter',
     port	 : 3306,
 	debug    :  false
 });
