@@ -6,7 +6,10 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "client-sessions": "^0.8.0",
+    "ejs": "*",
     "express": "3.2.6",
-    "ejs": "*"
+    "mysql": "^2.15.0",
+    "sha1": "^1.1.1"
   }
 }
